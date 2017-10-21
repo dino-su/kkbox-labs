@@ -9,6 +9,8 @@ import static org.junit.Assert.assertTrue;
 
 public class KKSearchPage extends KKPage {
     public static final BySelector SEARCH_FIELD = By.res(APP_PACKAGE, "search_src_text");
+    public static final BySelector SEARCH_ARTIST = By.text("ARTIST");
+    private static final BySelector SEARCH_SONG = By.text("SONG");
 
     public KKSearchPage(UiDevice device) {
         super(device);
@@ -24,6 +26,24 @@ public class KKSearchPage extends KKPage {
     public KKSearchPage checkTopResult(String expectedText) {
         BySelector selector = By.text(expectedText);
 
+        assertTrue(this.device.wait(Until.hasObject(selector), TIMEOUT));
+
+        return this;
+    }
+
+    public KKSearchPage checkArtistResult(String expectedText) {
+        this.device.wait(Until.findObject(SEARCH_ARTIST), TIMEOUT).click();
+
+        BySelector selector = By.text(expectedText);
+        assertTrue(this.device.wait(Until.hasObject(selector), TIMEOUT));
+
+        return this;
+    }
+
+    public KKSearchPage checkSongResult(String expectedText) {
+        this.device.wait(Until.findObject(SEARCH_SONG), TIMEOUT).click();
+
+        BySelector selector = By.text(expectedText);
         assertTrue(this.device.wait(Until.hasObject(selector), TIMEOUT));
 
         return this;
