@@ -42,6 +42,9 @@ public class SearchTest {
 
     @Test
     public void testSearch() {
+        // TODO
+        // kkbox.openSearch().search("linkin park").checkTopResult("Linkin Park (聯合公園)");
+
         // open search
         mDevice.wait(Until.findObject(By.res(APP_PACKAGE, "menu_global_search")), TIMEOUT).click();
 
@@ -55,6 +58,9 @@ public class SearchTest {
 
     @Test
     public void testSearchArtist() {
+        // TODO
+        // kkbox.openSearch().search("linkin park").checkArtistResult("Linkin Park (聯合公園)");
+
         // open search
         mDevice.wait(Until.findObject(By.res(APP_PACKAGE, "menu_global_search")), TIMEOUT).click();
 
@@ -69,6 +75,9 @@ public class SearchTest {
 
     @Test
     public void testSearchSong() {
+        // TODO
+        // kkbox.openSearch().search("numb encore").checkSongResult("Numb/Encore");
+
         // open search
         mDevice.wait(Until.findObject(By.res(APP_PACKAGE, "menu_global_search")), TIMEOUT).click();
 
