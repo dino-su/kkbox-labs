@@ -19,7 +19,6 @@ import static org.junit.Assert.assertTrue;
 @RunWith(AndroidJUnit4.class)
 public class SearchTest {
     private static final String APP_PACKAGE = "com.skysoft.kkbox.android";
-    private static final int LAUNCH_TIMEOUT = 10000;
     private static final int TIMEOUT = 5000;
     private static KKPage kkbox;
 
