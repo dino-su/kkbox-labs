@@ -31,9 +31,12 @@ public class TestBuilder  {
     private String mPassword;
     private Boolean mRequireLogin;
     private Boolean mHasLogin;
+    private boolean mDisableTutorial;
 
     public TestBuilder() {
-        // TODO
+        mDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
+        mRequireLogin = false;
+        mDisableTutorial = false;
     }
 
     public TestBuilder disableTrialMessage() {
@@ -44,11 +47,17 @@ public class TestBuilder  {
     }
 
     public TestBuilder loginViaEmail(String username, String password) {
-        // TODO
+        mUsername = username;
+        mPassword = password;
+        mRequireLogin = true;
+
+        return this;
     }
 
     public TestBuilder disableTutorial() {
-        // TODO
+        mDisableTutorial = true;
+
+        return this;
     }
 
     public KKPage launch() {
@@ -68,11 +77,19 @@ public class TestBuilder  {
         context.startActivity(intent);
 
         // TODO: Login KKBOX
-//        mHasLogin = !mDevice.wait(Until.hasObject(KKLoginPage.LOGIN_BUTTON), TIMEOUT);
-//
-//        if(mRequireLogin == true && mHasLogin == false) {
-//            new KKLoginPage(mDevice).loginViaEmail(mUsername, mPassword);
-//        }
+        mHasLogin = !mDevice.wait(Until.hasObject(KKLoginPage.LOGIN_BUTTON), TIMEOUT);
+
+        if(mRequireLogin == true && mHasLogin == false) {
+            new KKLoginPage(mDevice).loginViaEmail(mUsername, mPassword);
+        }
+
+        if(mDisableTutorial == true) {
+            // Open Search
+            mDevice.wait(Until.findObject(By.res(APP_PACKAGE, "menu_global_search")), LAUNCH_TIMEOUT).click();
+
+            // Dismiss Tutorial
+            mDevice.wait(Until.findObject(By.res(APP_PACKAGE, "menu_music_recognition")), TIMEOUT).click();
+        }
 
         return new KKPage(mDevice);
     }
