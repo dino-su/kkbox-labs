@@ -16,4 +16,11 @@ public class KKPage {
         // Wait for the app to appear
         this.device.wait(Until.hasObject(By.pkg(APP_PACKAGE).depth(0)), LAUNCH_TIMEOUT);
     }
+
+    public KKSearchPage openSearch() {
+
+        this.device.wait(Until.findObject(By.res(APP_PACKAGE, "menu_global_search")), TIMEOUT).click();
+
+        return new KKSearchPage(this.device);
+    }
 }

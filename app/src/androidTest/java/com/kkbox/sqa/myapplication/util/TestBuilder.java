@@ -16,7 +16,6 @@ import android.support.test.uiautomator.Until;
 import com.kkbox.sqa.myapplication.page.KKLoginPage;
 import com.kkbox.sqa.myapplication.page.KKPage;
 
-import org.junit.Assert;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.notNullValue;
@@ -50,13 +49,19 @@ public class TestBuilder  {
     public TestBuilder loginViaEmail(String username, String password) {
         // TODO: implement this function
 
-        return null;
+        mRequireLogin = true;
+
+        mUsername = username;
+        mPassword = password;
+
+        return this;
     }
 
     public TestBuilder disableTutorial() {
         // TODO: implement this function
 
-        return null;
+        mDisableTutorial = true;
+        return this;
     }
 
     public KKPage launch() {
@@ -76,13 +81,12 @@ public class TestBuilder  {
         context.startActivity(intent);
 
         // TODO: Login Handler, Uncomment to enable it.
-        // mHasLogin = !mDevice.wait(Until.hasObject(KKLoginPage.LOGIN_BUTTON), TIMEOUT);
-        // if(mRequireLogin == true && mHasLogin == false) {
-        //    new KKLoginPage(mDevice).loginViaEmail(mUsername, mPassword);
-        //
-        //    // Dismiss Drawer
-        //    mDevice.wait(Until.findObject(By.res(APP_PACKAGE, "menu_global_search")), LAUNCH_TIMEOUT).click();
-        // }
+         mHasLogin = !mDevice.wait(Until.hasObject(KKLoginPage.LOGIN_BUTTON), TIMEOUT);
+         if(mRequireLogin == true && mHasLogin == false && mDisableTutorial == true) {
+            new KKLoginPage(mDevice).loginViaEmail(mUsername, mPassword);
+            // Dismiss Drawer
+//            mDevice.wait(Until.findObject(By.res(APP_PACKAGE, "menu_global_search")), LAUNCH_TIMEOUT).click();
+         }
 
         // FIXME: Implement Tutorial Handler
 

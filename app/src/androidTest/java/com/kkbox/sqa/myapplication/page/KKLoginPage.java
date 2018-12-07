@@ -14,12 +14,12 @@ public class KKLoginPage extends KKPage {
 
     public void loginViaEmail(String username, String password) {
         // click Email login
-        this.device.wait(Until.findObject(By.res(APP_PACKAGE, "button_login")), TIMEOUT).click();
-        this.device.wait(Until.findObject(By.res(APP_PACKAGE, "button_login_with_email")), TIMEOUT).click();
+            this.device.wait(Until.findObject(By.res(APP_PACKAGE, "button_login")), TIMEOUT).click();
+            this.device.wait(Until.findObject(By.res(APP_PACKAGE, "button_login_with_email")), TIMEOUT).click();
 
-        // Submit login form
-        this.device.wait(Until.findObject(By.res(APP_PACKAGE, "text_uid")), TIMEOUT).setText(username);
-        this.device.wait(Until.findObject(By.res(APP_PACKAGE, "text_password")), TIMEOUT).setText(password);
-        this.device.wait(Until.findObject(By.res(APP_PACKAGE, "button_login")), TIMEOUT).click();
+            // Submit login form
+            this.device.wait(Until.findObject(By.res(APP_PACKAGE, "text_uid")), TIMEOUT).setText(username);
+            this.device.wait(Until.findObject(By.res(APP_PACKAGE, "text_password")), TIMEOUT).setText(password);
+            this.device.wait(Until.findObject(By.res(APP_PACKAGE, "button_login")), TIMEOUT).click();
     }
 }
